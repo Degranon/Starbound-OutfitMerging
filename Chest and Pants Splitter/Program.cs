@@ -147,10 +147,10 @@ namespace Chest_and_Pants_Splitter
 
         private static Bitmap ApllyMultingSleeves(Bitmap frontSleeves, Bitmap backSleeves)
         {
-            Bitmap result = new Bitmap(386, 602);
+            Bitmap result = new Bitmap(SLEEVES_WIDTH, SLEEVES_HEIGHT * 2);
 
             Superimpose(ref result, frontSleeves, 0, 0);
-            Superimpose(ref result, backSleeves, 0, 301);
+            Superimpose(ref result, backSleeves, 0, SLEEVES_HEIGHT);
 
             return result;
         }
