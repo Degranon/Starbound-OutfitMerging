@@ -7,8 +7,10 @@ namespace Chest_and_Pants_Splitter
     class Program
     {
         private const int ENTER = 13;
+        private const int FRAME_SIZE = 43;
         private const int PANTS_WIDTH = 387;
         private const int PANTS_HEIGHT = 258;
+        private const int PANTS_OLD_HEIGHT = 301;
         private const int CHEST_WIDTH = 86;
         private const int CHEST_HEIGHT = 258;
         private const int SLEEVES_WIDTH = 387;
@@ -16,6 +18,7 @@ namespace Chest_and_Pants_Splitter
 
         private static Size chestSize = new Size(CHEST_WIDTH, CHEST_HEIGHT);
         private static Size pantsSize = new Size(PANTS_WIDTH, PANTS_HEIGHT);
+        private static Size pantsOldSize = new Size(PANTS_WIDTH, PANTS_OLD_HEIGHT);
         private static Size sleevesSize = new Size(SLEEVES_WIDTH, SLEEVES_HEIGHT);
 
         static void Main(string[] args)
@@ -136,7 +139,7 @@ namespace Chest_and_Pants_Splitter
                 pantsBitmap = new Bitmap(firstPath);
             }
 
-            if (!chestBitmap.Size.Equals(chestSize) || !pantsBitmap.Size.Equals(pantsSize))
+            if (!chestBitmap.Size.Equals(chestSize) || ! (pantsBitmap.Size.Equals(pantsSize) || pantsBitmap.Size.Equals(pantsOldSize)) )
             {
                 Console.WriteLine("Incorrent size!");
                 return null;
@@ -159,27 +162,27 @@ namespace Chest_and_Pants_Splitter
         {
             Bitmap result = new Bitmap(pants);
 
-            Bitmap chestIdle = chest.Clone(new Rectangle(43, 0, 43, 43), chest.PixelFormat);
-            Bitmap chestIdle2 = chest.Clone(new Rectangle(0, 43, 43, 43), chest.PixelFormat);
-            Bitmap chestIdle3 = chest.Clone(new Rectangle(43, 43, 43, 43), chest.PixelFormat);
+            Bitmap chestIdle = chest.Clone(new Rectangle(FRAME_SIZE, 0, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
+            Bitmap chestIdle2 = chest.Clone(new Rectangle(0, FRAME_SIZE, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
+            Bitmap chestIdle3 = chest.Clone(new Rectangle(FRAME_SIZE, FRAME_SIZE, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
 
-            Bitmap chestRun = chest.Clone(new Rectangle(43, 86, 43, 43), chest.PixelFormat);
+            Bitmap chestRun = chest.Clone(new Rectangle(FRAME_SIZE, FRAME_SIZE * 2, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
 
-            Bitmap chestDuck = chest.Clone(new Rectangle(43, 129, 43, 43), chest.PixelFormat);
+            Bitmap chestDuck = chest.Clone(new Rectangle(FRAME_SIZE, FRAME_SIZE * 3, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
 
-            Bitmap chestClimb = chest.Clone(new Rectangle(43, 172, 43, 43), chest.PixelFormat);
-            Bitmap chestSwim = chest.Clone(new Rectangle(43, 215, 43, 43), chest.PixelFormat);
+            Bitmap chestClimb = chest.Clone(new Rectangle(FRAME_SIZE, FRAME_SIZE * 4, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
+            Bitmap chestSwim = chest.Clone(new Rectangle(FRAME_SIZE, FRAME_SIZE * 5, FRAME_SIZE, FRAME_SIZE), chest.PixelFormat);
 
             // Personality 1,5
-            Superimpose(ref result, chestIdle, 43, 0);
-            Superimpose(ref result, chestIdle, 215, 0);
+            Superimpose(ref result, chestIdle, FRAME_SIZE, 0);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 5, 0);
 
             // Personality 2,4
-            Superimpose(ref result, chestIdle2, 86, 0);
-            Superimpose(ref result, chestIdle2, 172, 0);
+            Superimpose(ref result, chestIdle2, FRAME_SIZE * 2, 0);
+            Superimpose(ref result, chestIdle2, FRAME_SIZE * 4, 0);
 
             // Personality 3
-            Superimpose(ref result, chestIdle3, 129, 0);
+            Superimpose(ref result, chestIdle3, FRAME_SIZE * 3, 0);
 
             // Duck
             Superimpose(ref result, chestDuck, 344, 0);
@@ -188,53 +191,53 @@ namespace Chest_and_Pants_Splitter
             Superimpose(ref result, chestIdle, 258, 1);
 
             // Walking
-            Superimpose(ref result, chestIdle, 43, 44);
-            Superimpose(ref result, chestIdle, 86, 45);
-            Superimpose(ref result, chestIdle, 129, 44);
-            Superimpose(ref result, chestIdle, 172, 43);
-            Superimpose(ref result, chestIdle, 215, 44);
-            Superimpose(ref result, chestIdle, 258, 45);
-            Superimpose(ref result, chestIdle, 301, 44);
-            Superimpose(ref result, chestIdle, 344, 43);
+            Superimpose(ref result, chestIdle, FRAME_SIZE, FRAME_SIZE + 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 2, FRAME_SIZE + 2);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 3, FRAME_SIZE + 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 4, FRAME_SIZE);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 5, FRAME_SIZE + 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 6, FRAME_SIZE + 2);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 7, FRAME_SIZE + 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 8, FRAME_SIZE);
 
             // Running
-            Superimpose(ref result, chestRun, 43, 86);
-            Superimpose(ref result, chestRun, 86, 85);
-            Superimpose(ref result, chestRun, 129, 86);
-            Superimpose(ref result, chestRun, 172, 87);
-            Superimpose(ref result, chestRun, 215, 86);
-            Superimpose(ref result, chestRun, 258, 85);
-            Superimpose(ref result, chestRun, 301, 86);
-            Superimpose(ref result, chestRun, 344, 87);
+            Superimpose(ref result, chestRun, FRAME_SIZE, FRAME_SIZE * 2);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 2, FRAME_SIZE * 2 - 1);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 3, FRAME_SIZE * 2);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 4, FRAME_SIZE * 2 + 1);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 5, FRAME_SIZE * 2);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 6, FRAME_SIZE * 2 - 1);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 7, FRAME_SIZE * 2);
+            Superimpose(ref result, chestRun, FRAME_SIZE * 8, FRAME_SIZE * 2 + 1);
 
             // Jumping
-            Superimpose(ref result, chestIdle, 43, 128);
-            Superimpose(ref result, chestIdle, 86, 128);
-            Superimpose(ref result, chestIdle, 129, 128);
-            Superimpose(ref result, chestIdle, 172, 128);
+            Superimpose(ref result, chestIdle, FRAME_SIZE, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 2, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 3, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 4, FRAME_SIZE * 3 - 1);
 
             // Falling
-            Superimpose(ref result, chestIdle, 215, 128);
-            Superimpose(ref result, chestIdle, 258, 128);
-            Superimpose(ref result, chestIdle, 301, 128);
-            Superimpose(ref result, chestIdle, 344, 128);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 5, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 6, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 7, FRAME_SIZE * 3 - 1);
+            Superimpose(ref result, chestIdle, FRAME_SIZE * 8, FRAME_SIZE * 3 - 1);
 
             // Climbing
-            Superimpose(ref result, chestClimb, 43, 172);
-            Superimpose(ref result, chestClimb, 86, 172);
-            Superimpose(ref result, chestClimb, 129, 172);
-            Superimpose(ref result, chestClimb, 172, 172);
-            Superimpose(ref result, chestClimb, 215, 172);
-            Superimpose(ref result, chestClimb, 258, 172);
-            Superimpose(ref result, chestClimb, 301, 172);
-            Superimpose(ref result, chestClimb, 344, 172);
+            Superimpose(ref result, chestClimb, FRAME_SIZE, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 2, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 3, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 4, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 5, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 6, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 7, FRAME_SIZE * 4);
+            Superimpose(ref result, chestClimb, FRAME_SIZE * 8, FRAME_SIZE * 4);
 
             // Swimming
-            Superimpose(ref result, chestSwim, 43, 215);
-            Superimpose(ref result, chestSwim, 172, 215);
-            Superimpose(ref result, chestSwim, 215, 216);
-            Superimpose(ref result, chestSwim, 258, 217);
-            Superimpose(ref result, chestSwim, 301, 216);
+            Superimpose(ref result, chestSwim, FRAME_SIZE, FRAME_SIZE * 5);
+            Superimpose(ref result, chestSwim, FRAME_SIZE * 4, FRAME_SIZE * 5);
+            Superimpose(ref result, chestSwim, FRAME_SIZE * 5, FRAME_SIZE * 5 + 1);
+            Superimpose(ref result, chestSwim, FRAME_SIZE * 6, FRAME_SIZE * 5 + 2);
+            Superimpose(ref result, chestSwim, FRAME_SIZE * 7, FRAME_SIZE * 5 + 1);
 
             return result;
         }
