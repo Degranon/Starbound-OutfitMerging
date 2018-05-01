@@ -1,7 +1,8 @@
 # Starbound-OutfitMerging
 Merges two images for using Silverfeelin's generator
 
-NOW MERGED (so ironic) WITH [SILVERFEELIN'S OUTFIT GENERATOR](https://github.com/Silverfeelin/Starbound-OutfitGenerator)
+## NOW MERGED (so ironic) WITH [SILVERFEELIN'S OUTFIT GENERATOR](https://github.com/Silverfeelin/Starbound-OutfitGenerator)
+
 This tool is created to simplify the work for cutom tailors, who had to manually merge chest and pants frames piece by piece to use the result with [Silverfeelin's Outfit Generator](https://github.com/Silverfeelin/Starbound-OutfitGenerator).
 
 # Installation
